@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Bulk Tracker 80 → 85 kg</title>
+<style>
+:root{--bg:#fff;--card:#f6f6f6;--text:#000;--muted:#6a6a6a;--accent:#000;--accentbg:#e4e4e4;--line:#d8d8d8;--onacc:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--card:#111;--text:#fff;--muted:#9a9a9a;--accent:#fff;--accentbg:#262626;--line:#2a2a2a;--onacc:#000}}
+:root[data-theme="dark"]{--bg:#000;--card:#111;--text:#fff;--muted:#9a9a9a;--accent:#fff;--accentbg:#262626;--line:#2a2a2a;--onacc:#000}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding-bottom:84px;-webkit-tap-highlight-color:transparent}
+main{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:4px 0 2px}
+h2{font-size:15px;margin:20px 0 8px;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
+.sub{color:var(--muted);font-size:14px;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.big{font-size:30px;font-weight:700;line-height:1.1}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bar{height:10px;background:var(--accentbg);border-radius:6px;overflow:hidden;margin-top:10px}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:6px;transition:width .3s}
+.it{display:flex;gap:12px;align-items:flex-start;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+.it:last-child{border-bottom:0}
+.it input{width:24px;height:24px;flex:none;margin:1px 0 0;accent-color:var(--accent)}
+.it input:checked+span{color:var(--muted);text-decoration:line-through}
+.muted{color:var(--muted);font-size:14px}
+input.num{width:92px;font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);text-align:right}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:8px 14px}
+button.primary{background:var(--accent);color:var(--onacc);border-color:var(--accent)}
+.wk{display:flex;justify-content:space-between;align-items:center;padding:10px 2px;border-bottom:1px solid var(--line);gap:8px}
+.wk:last-child{border-bottom:0}
+.tag{font-size:12px;padding:2px 8px;border-radius:20px;background:var(--accentbg);color:var(--accent);white-space:nowrap}
+.tag.now{background:var(--accent);color:var(--onacc)}
+.ok{color:var(--accent);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.scroll{overflow-x:auto}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;border:0;background:none;color:var(--muted);font-size:11px;padding:6px 0;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button b{font-size:20px;font-weight:400}
+nav button.on{color:var(--accent);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chips button{font-size:14px;padding:8px 12px;border-radius:20px}
+.msg{padding:10px 12px;border-radius:14px;margin-bottom:8px;white-space:pre-wrap;max-width:92%;overflow-wrap:anywhere}
+.msg.user{background:var(--accent);color:var(--onacc);margin-left:auto}
+.msg.assistant{background:var(--card);border:1px solid var(--line)}
+.ask{display:flex;gap:8px;align-items:flex-end;margin-top:12px}
+textarea{flex:1;font:inherit;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--text);resize:none;min-height:46px}
+button:disabled{opacity:.5}
+.big{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+h1{font-size:26px;letter-spacing:-.02em}
+.bar{height:8px}
+button:active{opacity:.6}
+.tbtn{width:40px;height:40px;border-radius:50%;padding:0;font-size:18px}
+.g{stroke:var(--line)}.tl{stroke:var(--muted);fill:none;stroke-dasharray:4 4;stroke-width:1.5}
+.al{stroke:var(--text);fill:none;stroke-width:2.5;stroke-linejoin:round}.dot{fill:var(--text)}
+svg text{fill:var(--muted);font-size:10px}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-top:6px}
+.strip{display:flex;justify-content:space-between;margin:12px 0 14px}
+.day{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:12px;color:var(--muted);background:none;border:0;padding:0}
+.day i{font-style:normal;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--text);border:2px dashed var(--line)}
+.day.has i{border:2px solid var(--text)}
+.day.sel i{background:var(--accent);color:var(--onacc);border-color:var(--accent)}
+.hero{display:flex;justify-content:space-between;align-items:center}
+.macros{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.mc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 6px;text-align:center}
+.mc b{display:block;font-size:20px}.mc span{font-size:12px;color:var(--muted)}
+.meal{display:flex;gap:12px;align-items:center}
+.meal img,.ph{width:60px;height:60px;border-radius:12px;object-fit:cover;background:var(--accentbg);display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}
+.fab{position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--accent);color:var(--onacc);font-size:30px;border:0;box-shadow:0 4px 18px rgba(0,0,0,.45);padding:0;line-height:1}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center;z-index:10}
+.ov.on{display:flex}
+.sheet{background:var(--bg);width:100%;max-width:560px;border-radius:24px 24px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));max-height:92%;overflow:auto;border:1px solid var(--line)}
+.opt{display:flex;gap:14px;align-items:center;width:100%;text-align:left;padding:14px 16px;border-radius:16px;margin-bottom:10px;background:var(--card)}
+.opt>b{font-size:26px}
+.fld{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+input.txt{font:inherit;width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--text)}
+.num2{font-size:52px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1}
+.gauge{position:relative;height:16px;background:var(--accentbg);border-radius:8px;margin-top:14px}
+.gauge i{display:block;height:100%;background:var(--accent);border-radius:8px;transition:width .4s}
+.gauge b{position:absolute;top:-5px;width:3px;height:26px;background:var(--muted);border-radius:2px}
+.mbar{margin:12px 0}.mbar .bar{margin-top:5px;height:6px}
+.mrow{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line);margin-top:8px}
+.mrow img{width:40px;height:40px;border-radius:10px;object-fit:cover;flex:none}
+.warnbox{border:1px solid var(--text);border-radius:12px;padding:10px;margin:0 0 10px;font-size:14px}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
+<input type="file" accept="image/*" id="photo" hidden>
+<input type="file" accept="image/*" capture="environment" id="cam" hidden>
+<button class="fab" id="fab" data-sheet="open" aria-label="Add food">+</button>
+<nav id="nav"></nav>
+<script>
+var START=new Date(2026,9,12);
+var T=[80.4,80.8,81.3,81.7,82.1,82.5,82.9,83.3,83.8,84.2,84.6,85.0];
+var DAILY=["Eat 4–5 meals (about 3,000+ kcal)","Hit protein target (150–160 g)","Drink 2.5–3 litres of water","Sleep 7–8 hours","Halal protein source at every meal","Lifting session done (on training days)"];
+var WEEKLY=["Sunday: supermarket / halal butcher shop","Sunday: cook and portion rice, chicken, mince","Sunday: freeze extra meat in portions","Check labels: gelatine, alcohol flavourings, rennet","Plan this week's 3–4 training days","Weigh in 2–3 mornings and record the average","Compare to target and adjust calories if needed"];
+var SHOP=["Protein: halal chicken 2 kg, mince 1 kg, lamb/beef 0.5–1 kg, eggs 30, tuna/salmon/sardines, Greek yoghurt, skyr, cottage cheese, whole milk 4–6 L, halal-certified whey","Carbs: oats 1 kg+, rice 2 kg, wholewheat pasta, potatoes, sweet potatoes, wholemeal bread/wraps, bananas, dates, berries, lentils, chickpeas, tinned beans","Fats: olive oil, peanut/almond butter, mixed nuts, avocados, chia or flax","Veg: spinach, broccoli, peppers, tomatoes, onions, carrots","Flavour: garlic, ginger, cumin, paprika, turmeric, pepper, chilli, passata"];
+var SHOPCAT=[
+["🥩 Protein (halal)",["Halal chicken breast and thighs (2 kg)","Halal minced beef, 5–10% fat (1 kg)","Halal lamb or beef steak / diced meat (0.5–1 kg)","Eggs (30)","Tinned tuna, salmon and sardines, or fresh salmon / white fish","Greek yoghurt","High-protein skyr","Cottage cheese","Whole milk (4–6 litres)","Whey protein (halal-certified, gelatine-free)"]],
+["🍚 Carbs",["Oats (1 kg or more)","Basmati or brown rice (2 kg)","Wholewheat pasta","Potatoes","Sweet potatoes","Wholemeal bread, wraps and pitta","Bananas","Dates","Apples","Berries","Dried lentils and chickpeas","Tinned beans"]],
+["🥑 Healthy fats",["Olive oil","Peanut or almond butter (no added sugar)","Mixed nuts and almonds","Avocados","Chia or flax seeds"]],
+["🥦 Veg",["Spinach","Broccoli","Peppers","Tomatoes","Onions","Carrots"]],
+["🧂 Flavour",["Garlic and ginger","Cumin, paprika, turmeric, black pepper, chilli","Passata or tinned tomatoes"]],
+["☪️ Halal label check",["Check labels for gelatine, alcohol-based flavourings and non-halal rennet in cheese"]]];
+var PHASES=[
+["Phase 1: Weeks 1–4 (12 Oct – 8 Nov): Get into the routine",["Start at about 3,000 kcal a day","Build the Sunday shop and meal prep habit","Start a lifting programme, 3–4 days a week","Log every weigh-in","Week 4 weight about 81.7 kg"]],
+["Phase 2: Weeks 5–8 (9 Nov – 6 Dec): Keep building",["Increase gym weights whenever you can","Review calories at end of weeks 4 and 6","Add about 100 kcal a day as weight rises","Week 8 weight about 83.3 kg"]],
+["Phase 3: Weeks 9–12 (7 Dec – 3 Jan): Finish strong",["Stay consistent even if appetite drops","Use liquid calories (milk, shakes, dates)","Review calories at end of week 10","Week 12 weight reaches 85 kg"]],
+["Finish line: 4–7 Jan",["Take a final weigh-in average","Take a progress photo and compare to the start","Decide: maintain (cut about 300–400 kcal) or keep bulking"]]];
+var RULES=[["Under 0.25 kg / week","Add about 200 kcal a day (rice, nut butter, olive oil, whole milk)"],["0.25–0.5 kg / week","Stay the course"],["Over 0.5 kg / week","Cut about 150–200 kcal a day"],["Strength stuck 2+ weeks","Check sleep, protein and training programme"]];
+
+var S={c:{},w:{}};
+try{var raw=localStorage.getItem('bulk-v1');if(raw){S=JSON.parse(raw)||S}}catch(e){}
+S.c=S.c||{};S.w=S.w||{};S.m=S.m||{};S.f=S.f||{};
+var TH='dark';try{TH=localStorage.getItem('bulk-theme')||'dark'}catch(e){}
+function applyTh(){document.documentElement.setAttribute('data-theme',TH)}
+applyTh();
+function save(){try{localStorage.setItem('bulk-v1',JSON.stringify(S))}catch(e){}}
+
+function pad(n){return n<10?'0'+n:''+n}
+function dkey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+function curWeek(){var d=Math.floor((new Date()-START)/864e5);var n=Math.floor(d/7)+1;return Math.max(1,Math.min(12,n))}
+function wkStart(n){return new Date(START.getTime()+(n-1)*7*864e5)}
+function fmt(d){return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})}
+function latest(){for(var n=12;n>=1;n--){var v=parseFloat(S.w[n]);if(v>0)return {n:n,v:v}}return null}
+
+var tab='today',vw=curWeek();
+var sel=dkey(new Date()),M={mode:'menu'},IMG=false,CAM=null,RC=[],SLOT=2,GOAL={k:3100,p:155,c:400,f:85};
+
+function items(list,prefix){
+  return list.map(function(t,i){var k=prefix+i;
+    return '<label class="it"><input type="checkbox" data-k="'+k+'"'+(S.c[k]?' checked':'')+'><span>'+t+'</span></label>'}).join('');
+}
+function count(list,prefix){var d=0;list.forEach(function(_,i){if(S.c[prefix+i])d++});return d}
+function wInput(n){return '<input class="num" type="number" inputmode="decimal" step="0.1" min="30" max="200" placeholder="kg" data-w="'+n+'" value="'+(S.w[n]||'')+'">'}
+
+function header(){
+  var l=latest(),cur=l?l.v:80,pct=Math.max(0,Math.min(100,(cur-80)/5*100));
+  return '<div class="card"><div class="row"><div><div class="muted">Current weight</div><div class="big">'+cur.toFixed(1)+' kg</div></div>'+
+  '<div style="text-align:right"><div class="muted">Goal</div><div class="big">85 kg</div></div></div>'+
+  '<div class="bar"><i style="width:'+pct+'%"></i></div>'+
+  '<div class="muted" style="margin-top:6px">'+(85-cur>0?(85-cur).toFixed(1)+' kg to go':'Goal reached! 🎉')+'</div></div>';
+}
+
+function themeBtn(){return '<button class="tbtn" data-theme-btn aria-label="Switch theme">'+(TH==='dark'?'☀︎':'☾')+'</button>'}
+function streak(){var n=0,d=new Date();var c=function(x){return (S.f[dkey(x)]||[]).length>0};if(!c(d))d.setDate(d.getDate()-1);while(c(d)&&n<400){n++;d.setDate(d.getDate()-1)}return n}
+function streakChip(){return '<span class="tag" style="font-size:14px;padding:6px 10px">🔥 '+streak()+'</span>'}
+function macroCard(){
+  var d=S.m[dkey(new Date())]||{},k=d.k||0,p=d.p||0;
+  function r(lbl,key,val,goal,unit){return '<div style="margin-top:12px"><div class="row"><span>'+lbl+' <span class="muted">/ '+goal+unit+'</span></span><input class="num" type="number" inputmode="numeric" min="0" placeholder="0" data-m="'+key+'" value="'+(val||'')+'"></div><div class="bar"><i style="width:'+Math.min(100,val/goal*100)+'%"></i></div></div>'}
+  return '<div class="card"><b>Today\'s intake</b><div class="muted">Enter your running total for the day.</div>'+r('Calories','k',k,3100,' kcal')+r('Protein','p',p,155,' g')+'</div>';
+}
+function chart(){
+  var W=320,H=180,pl=30,pr=10,pt=10,pb=22;
+  var x=function(i){return pl+i*(W-pl-pr)/12},y=function(v){return pt+(85.5-v)*(H-pt-pb)/6};
+  var g='',i;
+  for(i=80;i<=85;i++)g+='<line class="g" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y(i)+'" y2="'+y(i)+'"/><text x="'+(pl-6)+'" y="'+(y(i)+3)+'" text-anchor="end">'+i+'</text>';
+  for(i=0;i<=12;i+=2)g+='<text x="'+x(i)+'" y="'+(H-6)+'" text-anchor="middle">'+(i?'W'+i:'Start')+'</text>';
+  var tp='M'+x(0)+','+y(80)+T.map(function(v,j){return 'L'+x(j+1)+','+y(v)}).join('');
+  var pts=[{i:0,v:80}];for(i=1;i<=12;i++){var v=parseFloat(S.w[i]);if(v>0)pts.push({i:i,v:v})}
+  var ap=pts.map(function(q,j){return (j?'L':'M')+x(q.i)+','+y(Math.max(79.5,Math.min(85.5,q.v)))}).join('');
+  var dots=pts.map(function(q){return '<circle class="dot" r="3.5" cx="'+x(q.i)+'" cy="'+y(Math.max(79.5,Math.min(85.5,q.v)))+'"/>'}).join('');
+  return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Weight progress chart">'+g+'<path class="tl" d="'+tp+'"/><path class="al" d="'+ap+'"/>'+dots+'</svg><div class="legend"><span>━ Actual</span><span>┅ Target</span></div>';
+}
+function tot(k){return (S.f[k]||[]).reduce(function(a,m){a.k+=m.k||0;a.p+=m.p||0;a.c+=m.c||0;a.f+=m.f||0;return a},{k:0,p:0,c:0,f:0})}
+function ring(pct,size,sw,ico){
+  var r=(size-sw)/2,c=2*Math.PI*r,off=c*(1-Math.min(1,Math.max(0,pct)/100)),h=size/2;
+  return '<div style="position:relative;width:'+size+'px;height:'+size+'px;display:inline-block"><svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" style="transform:rotate(-90deg)"><circle cx="'+h+'" cy="'+h+'" r="'+r+'" fill="none" stroke-width="'+sw+'" style="stroke:var(--accentbg)"/><circle cx="'+h+'" cy="'+h+'" r="'+r+'" fill="none" stroke-width="'+sw+'" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'" style="stroke:var(--accent)"/></svg><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:'+Math.round(size*.32)+'px">'+ico+'</span></div>';
+}
+var SLOTS=[['Breakfast','🌅',750,'Oats in milk, banana, peanut butter, 3 eggs'],['Lunch','🍗',850,'Chicken, rice, veg and olive oil'],['Snack','🥜',450,'Greek yoghurt, dates and a handful of nuts'],['Dinner','🥩',750,'Mince or steak, potato or pasta, avocado salad'],['Before bed','🥛',300,'Cottage cheese or skyr with berries']];
+function slotOf(m){if(m.s!=null)return m.s;var h=parseInt(String(m.t||'12').split(':')[0])||12;return h<11?0:h<15?1:h<18?2:h<22?3:4}
+function slotNow(){var h=new Date().getHours();return h<11?0:h<15?1:h<18?2:h<22?3:4}
+function recents(){var all=[];Object.keys(S.f).forEach(function(d){(S.f[d]||[]).forEach(function(m){all.push(m)})});all.sort(function(a,b){return b.id-a.id});var seen={},out=[];all.forEach(function(m){var k=String(m.n).toLowerCase();if(!seen[k]&&out.length<5){seen[k]=1;out.push(m)}});RC=out;return out}
+function bars(){
+  var W=320,H=150,pl=8,pb=20,pt=16,days=[],i,on=0;
+  for(i=6;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);days.push({l:'SMTWTFS'.charAt(d.getDay()),k:tot(dkey(d)).k})}
+  var mx=Math.max(GOAL.k*1.15,Math.max.apply(null,days.map(function(x){return x.k}))),y=function(v){return pt+(H-pt-pb)*(1-v/mx)},cw=(W-2*pl)/7,g='';
+  days.forEach(function(d,j){var x=pl+j*cw+(cw-26)/2,hit=d.k>=GOAL.k*.9;if(hit)on++;
+    g+='<rect x="'+x+'" y="'+y(d.k)+'" width="26" height="'+Math.max(2,H-pb-y(d.k))+'" rx="5" style="fill:'+(hit?'var(--text)':'var(--accentbg)')+'"/><text x="'+(x+13)+'" y="'+(H-6)+'" text-anchor="middle">'+d.l+'</text>'+(d.k?'<text x="'+(x+13)+'" y="'+(y(d.k)-4)+'" text-anchor="middle">'+Math.round(d.k/100)/10+'k</text>':'')});
+  return '<div class="row" style="margin-bottom:6px"><b>'+on+'/7 days on target</b><span class="muted">goal '+GOAL.k.toLocaleString()+' kcal</span></div><svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Calories over the last 7 days"><line class="g" x1="'+pl+'" x2="'+(W-pl)+'" y1="'+y(GOAL.k)+'" y2="'+y(GOAL.k)+'" style="stroke-dasharray:4 4"/>'+g+'</svg>';
+}
+function viewToday(){
+  var now=new Date(),n=curWeek(),dow=(now.getDay()+6)%7,td=dkey(now),t=tot(sel),meals=S.f[sel]||[],strip='',i,isT=sel===td;
+  for(i=0;i<7;i++){var d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-dow+i),k=dkey(d);
+    strip+='<button class="day'+((S.f[k]||[]).length?' has':'')+(k===sel?' sel':'')+'" data-day="'+k+'">'+'MTWTFSS'.charAt(i)+'<i>'+d.getDate()+'</i></button>'}
+  var hr=now.getHours()+now.getMinutes()/60,exp=Math.round(GOAL.k*Math.min(1,Math.max(0,(hr-7)/15))),pct=Math.min(100,t.k/GOAL.k*100);
+  var st=t.k>=GOAL.k*.95?'💪 Goal hit':isT?(t.k<exp*.9?'⚠️ '+(exp-t.k).toLocaleString()+' kcal behind pace. Time to eat.':'✓ On pace'):(GOAL.k-t.k).toLocaleString()+' kcal short of goal';
+  var gauge='<div class="card"><div class="muted">Fuel</div><div class="row" style="align-items:baseline;justify-content:flex-start;gap:8px"><span class="num2">'+t.k.toLocaleString()+'</span><span class="muted">/ '+GOAL.k.toLocaleString()+' kcal</span></div><div class="gauge"><i style="width:'+pct+'%"></i>'+(isT&&exp?'<b style="left:'+Math.min(99,exp/GOAL.k*100)+'%"></b>':'')+'</div><div class="row muted" style="margin-top:8px"><span>'+st+'</span>'+(isT?'<span>| pace</span>':'')+'</div></div>';
+  var mac='<div class="card">'+[['Protein','p'],['Carbs','c'],['Fats','f']].map(function(m){return '<div class="mbar"><div class="row"><b>'+m[0]+'</b><span class="muted">'+t[m[1]]+' / '+GOAL[m[1]]+' g</span></div><div class="bar"><i style="width:'+Math.min(100,t[m[1]]/GOAL[m[1]]*100)+'%"></i></div></div>'}).join('')+'</div>';
+  var slots=SLOTS.map(function(sl,si){
+    var ms=meals.filter(function(m){return slotOf(m)===si}),sum=ms.reduce(function(a,m){return a+(m.k||0)},0);
+    var rows=ms.map(function(m){return '<div class="mrow">'+(m.img?'<img src="'+m.img+'" alt="">':'')+'<div style="flex:1;min-width:0"><div style="overflow-wrap:anywhere">'+esc(m.n)+'</div><div class="muted">'+m.k+' kcal · P'+m.p+' C'+m.c+' F'+m.f+'</div></div><button class="tbtn" style="width:30px;height:30px;font-size:12px;flex:none" data-del="'+m.id+'" aria-label="Delete">✕</button></div>'}).join('');
+    return '<div class="card"><div class="row"><b>'+sl[1]+' '+sl[0]+'</b><span class="row" style="gap:8px"><span class="muted">'+sum+' / '+sl[2]+' kcal</span><button class="tbtn" style="width:34px;height:34px;font-size:20px" data-slot="'+si+'" aria-label="Add to '+sl[0]+'">+</button></span></div>'+(rows||'<div class="muted" style="margin-top:6px">Try: '+sl[3]+'</div>')+'</div>'}).join('');
+  var k2='d:'+sel+':',done=count(DAILY,k2);
+  return '<div class="row"><div><h1>Bulk AI</h1><div class="muted">Week '+n+' · target '+T[n-1].toFixed(1)+' kg</div></div><span class="row" style="gap:8px">'+streakChip()+themeBtn()+'</span></div>'+
+  '<div class="strip">'+strip+'</div>'+gauge+mac+
+  '<button class="opt" data-sheet="next"><b>🧠</b><span><b>What should I eat next?</b><br><span class="muted">AI suggests halal ideas that fit what you have left</span></span></button>'+
+  '<h2>Today\'s meals</h2>'+slots+
+  '<div class="card"><div class="row"><b>Daily habits</b><span class="tag">'+done+'/'+DAILY.length+'</span></div>'+items(DAILY,k2)+'</div>'+
+  '<div class="card"><div class="row"><span>Week '+n+' average weight</span>'+wInput(n)+'</div></div>';
+}
+function suggest(){
+  var t=tot(sel),l=function(k){return Math.max(0,GOAL[k]-t[k])},now=new Date();
+  M={mode:'next',text:''};drawSheet();
+  var q='I am on a halal clean bulk (goal 3,100 kcal, 155 g protein, 400 g carbs, 85 g fat a day). So far today I have eaten '+t.k+' kcal. Remaining: '+l('k')+' kcal, '+l('p')+' g protein, '+l('c')+' g carbs, '+l('f')+' g fat. The time is '+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+'. Suggest 3 halal meal or snack ideas that fit, each on its own line with approximate kcal and protein and a few words on how to make it. Under 120 words. If nothing is left to eat, say so briefly.';
+  SAMPLE(q,{cache:false,onText:function(o){M.text=o.text;var e=document.getElementById('nxt');if(e)e.innerHTML=md(o.text)}}).then(function(r){M.text=r.text;drawSheet()}).catch(function(){M={mode:'err',msg:'The AI could not make suggestions right now. Please try again.'};drawSheet()});
+}
+function thumb(f){return new Promise(function(res){var fr=new FileReader();fr.onload=function(){var im=new Image();im.onload=function(){try{var c=document.createElement('canvas'),z=96,r=Math.max(z/im.width,z/im.height);c.width=c.height=z;c.getContext('2d').drawImage(im,(z-im.width*r)/2,(z-im.height*r)/2,im.width*r,im.height*r);res(c.toDataURL('image/jpeg',.7))}catch(e){res('')}};im.onerror=function(){res('')};im.src=fr.result};fr.onerror=function(){res('')};fr.readAsDataURL(f)})}
+function sheetHTML(){
+  var o=function(a,ic,t,d){return '<button class="opt" data-sheet="'+a+'"><b>'+ic+'</b><span><b>'+t+'</b><br><span class="muted">'+d+'</span></span></button>'};
+  var ttl={menu:'Add food',text:'Describe your meal',review:'Check and log',cam:'Scan food',camerr:'Camera unavailable',busy:'Analysing…',err:'Something went wrong',next:'Eat next'}[M.mode];
+  var x='<div class="row" style="margin-bottom:12px"><b style="font-size:18px">'+ttl+'</b><button class="tbtn" data-sheet="close" style="width:34px;height:34px;font-size:14px">✕</button></div>';
+  if(M.mode==='menu'){
+    x+='<p class="muted" style="margin:-6px 0 10px">Adding to '+SLOTS[SLOT][0]+'</p>';
+    x+=o('scan','📷','Scan food','Live camera. AI estimates calories and macros');x+=o('pick','🖼️','Choose a photo','Use a meal photo you already took');
+    x+=o('text','✍️','Describe a meal','Type what you ate and AI estimates it');
+    x+=o('manual','⚡','Quick add','Enter calories and macros yourself');
+    var rc=recents();if(rc.length)x+='<div class="muted" style="margin:14px 0 8px">Log again</div><div class="chips">'+rc.map(function(m,i){return '<button data-rep="'+i+'">'+esc(m.n)+' · '+m.k+'</button>'}).join('')+'</div>';
+  }else if(M.mode==='text'){
+    x+='<textarea id="desc" rows="3" style="width:100%" placeholder="e.g. 200 g grilled chicken, 2 cups of rice and salad with olive oil"></textarea><button class="primary" style="width:100%;margin-top:10px" data-sheet="estimate">Estimate</button>';
+  }else if(M.mode==='busy'){
+    x+='<div style="text-align:center;padding:26px 0">'+(M.thumb?'<img src="'+M.thumb+'" style="width:72px;height:72px;border-radius:14px;object-fit:cover" alt=""><br>':'')+'<p class="muted">Estimating calories and macros. This can take up to a minute…</p></div>';
+  }else if(M.mode==='next'){
+    x+='<div id="nxt" style="white-space:pre-wrap">'+(M.text?md(M.text):'Thinking…')+'</div>';
+  }else if(M.mode==='cam'){
+    x+='<div style="border-radius:16px;overflow:hidden;background:#000"><video id="vid" playsinline muted autoplay style="width:100%;display:block;max-height:56vh;object-fit:cover"></video></div><p class="muted" style="text-align:center;margin:10px 0">Keep the whole plate in view, then tap the button</p><div style="display:flex;justify-content:center"><button id="shutter" data-sheet="shot" aria-label="Take photo" style="width:70px;height:70px;border-radius:50%;background:var(--accent);border:4px solid var(--bg);outline:3px solid var(--accent);padding:0"></button></div>';
+  }else if(M.mode==='camerr'){
+    x+='<p>The live camera is not available here (your browser or the app blocked it). You can use your phone camera instead.</p><button class="primary" style="width:100%" data-sheet="native">Open phone camera</button>';
+  }else if(M.mode==='err'){
+    x+='<p>'+esc(M.msg)+'</p><button class="primary" style="width:100%" data-sheet="manual">Enter manually</button>';
+  }else{
+    var d=M.d,f=function(id,l,v,u){return '<div class="fld"><span>'+l+'</span><span><input class="num" type="number" inputmode="numeric" min="0" id="'+id+'" value="'+v+'"> '+u+'</span></div>'};
+    x+=(M.thumb?'<img src="'+M.thumb+'" style="width:72px;height:72px;border-radius:14px;object-fit:cover;margin-bottom:8px" alt="">':'')+(M.ai?'<p class="muted" style="margin:0 0 8px">AI estimate. Adjust anything that looks off.</p>':'')+(d.h?'<p class="warnbox">⚠️ Halal check: '+esc(d.h)+'</p>':'')+'<input class="txt" id="f-n" placeholder="Meal name" value="'+esc(d.n).replace(/"/g,'&quot;')+'">'+f('f-k','Calories',d.k,'kcal')+f('f-p','Protein',d.p,'g')+f('f-c','Carbs',d.c,'g')+f('f-f','Fats',d.f,'g')+'<button class="primary" style="width:100%;margin-top:10px" data-sheet="log">Log meal</button>';
+  }
+  return x;
+}
+function drawSheet(){document.getElementById('sheet').innerHTML=sheetHTML();document.getElementById('ov').className='ov on'}
+function stopCam(){if(CAM){CAM.getTracks().forEach(function(t){t.stop()});CAM=null}}
+function startCam(){
+  if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){M={mode:'camerr'};drawSheet();return}
+  M={mode:'cam'};drawSheet();
+  navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:960}},audio:false}).then(function(st){
+    if(M.mode!=='cam'){st.getTracks().forEach(function(t){t.stop()});return}
+    CAM=st;var v=document.getElementById('vid');if(v){v.srcObject=st;if(v.play)v.play().catch(function(){})}
+  }).catch(function(){M={mode:'camerr'};drawSheet()});
+}
+function shot(){
+  var v=document.getElementById('vid');if(!v||!v.videoWidth)return;
+  var w=Math.min(1024,v.videoWidth),h=Math.round(w*v.videoHeight/v.videoWidth),c=document.createElement('canvas');
+  c.width=w;c.height=h;c.getContext('2d').drawImage(v,0,0,w,h);
+  c.toBlob(function(b){stopCam();if(b)analyze(b,null);else{M={mode:'err',msg:'Could not capture the photo. Please try again.'};drawSheet()}},'image/jpeg',.85);
+}
+function closeSheet(){stopCam();document.getElementById('ov').className='ov'}
+function analyze(file,text){
+  M={mode:'busy',thumb:''};drawSheet();
+  var tp=file?thumb(file):Promise.resolve('');
+  var q='Estimate the nutrition of this meal'+(file?' shown in the photo':': '+text)+'. Give totals for the whole portion. Return ONLY JSON like {"name":"short meal name","kcal":650,"protein":40,"carbs":70,"fat":18,"halal_concern":""} using whole numbers. The user eats halal only: if any visible or likely ingredient may not be halal (pork, bacon, ham, alcohol, gelatine), put a short note in halal_concern, otherwise leave it as an empty string.';
+  var o={cache:false};if(file)o.images=file;
+  tp.then(function(th){M.thumb=th;if(M.mode==='busy')drawSheet()});
+  Promise.all([tp,SAMPLE.json(q,o)]).then(function(r){var d=r[1]||{},z=function(v){return Math.max(0,Math.round(Number(v))||0)};
+    M={mode:'review',ai:true,thumb:r[0],d:{h:String(d.halal_concern||''),n:String(d.name||'Meal'),k:z(d.kcal),p:z(d.protein),c:z(d.carbs),f:z(d.fat)}};drawSheet()})
+  .catch(function(e){M={mode:'err',msg:e&&e.code==='not_granted'?'Permission is needed to use AI. You can still enter the meal manually.':e&&e.code==='rate_limited'?'Too many requests. Wait a minute or enter it manually.':'The AI could not analyse that. Try again or enter it manually.'};drawSheet()});
+}
+function sheetAct(a){
+  var g=function(id){var e=document.getElementById(id);return e?e.value:''};
+  if((a==='scan'||a==='pick'||a==='text'||a==='next')&&!(SAMPLE&&(IMG||a==='text'||a==='next'))){M={mode:'err',msg:'AI scanning only works when you open this app from your Claude link while signed in to Claude. Open that link, or enter the meal manually.'};drawSheet();return}
+  if(a==='open'){SLOT=slotNow();M={mode:'menu'};drawSheet()}
+  else if(a==='next')suggest();
+  else if(a==='close')closeSheet();
+  else if(a==='scan')startCam();
+  else if(a==='native')document.getElementById('cam').click();
+  else if(a==='shot')shot();
+  else if(a==='pick')document.getElementById('photo').click();
+  else if(a==='text'){M={mode:'text'};drawSheet()}
+  else if(a==='estimate'){var v=g('desc').trim();if(v)analyze(null,v)}
+  else if(a==='manual'){M={mode:'review',ai:false,thumb:'',d:{n:'',k:'',p:'',c:'',f:''}};drawSheet()}
+  else if(a==='log'){
+    var k=Math.round(parseFloat(g('f-k')))||0;if(!k)return;
+    var m={id:Date.now(),n:g('f-n').trim()||'Meal',k:k,p:Math.round(parseFloat(g('f-p')))||0,c:Math.round(parseFloat(g('f-c')))||0,f:Math.round(parseFloat(g('f-f')))||0,t:new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),img:M.thumb||'',s:SLOT};
+    (S.f[sel]=S.f[sel]||[]).push(m);save();closeSheet();render(true);
+  }
+}
+function viewWeek(){
+  var n=vw,s=wkStart(n),e=new Date(s.getTime()+6*864e5),wd=count(WEEKLY,'w:'+n+':'),sd=count(SHOP,'s:'+n+':');
+  return '<h1>Weekly plan</h1>'+
+  '<div class="row" style="margin:10px 0"><button data-nav="-1"'+(n<=1?' disabled':'')+'>‹ Prev</button><div style="text-align:center"><b>Week '+n+'</b><div class="muted">'+fmt(s)+' – '+fmt(e)+'</div></div><button data-nav="1"'+(n>=12?' disabled':'')+'>Next ›</button></div>'+
+  '<div class="card"><div class="row"><span>Target <b>'+T[n-1].toFixed(1)+' kg</b></span><span class="row" style="gap:8px">Actual '+wInput(n)+'</span></div></div>'+
+  '<div class="card"><div class="row"><b>Weekly checklist</b><span class="tag">'+wd+'/'+WEEKLY.length+'</span></div>'+items(WEEKLY,'w:'+n+':')+'</div>'+
+  '<div class="card"><div class="row"><b>Shopping list</b><button data-go="shop">Open Shop 🛒</button></div></div>';
+}
+
+function viewTracker(){
+  var c=curWeek(),rows='';
+  for(var n=1;n<=12;n++){
+    var a=parseFloat(S.w[n]),hit=a>=T[n-1];
+    rows+='<div class="wk"><div><b>Week '+n+'</b> '+(n===c?'<span class="tag now">now</span>':'')+'<div class="muted">'+fmt(wkStart(n))+' · target '+T[n-1].toFixed(1)+(a>0?' · <span class="'+(hit?'ok':'')+'">'+(hit?'on track ✓':(a-T[n-1]).toFixed(1)+' kg')+'</span>':'')+'</div></div>'+wInput(n)+'</div>';
+  }
+  return '<h1>Weight tracker</h1><p class="sub">Enter your average weight for each week.</p>'+header()+'<h2>Last 7 days</h2><div class="card">'+bars()+'</div><h2>Weight</h2><div class="card">'+chart()+'</div><div class="card">'+rows+'</div>';
+}
+
+function viewPlan(){
+  var h='<h1>The plan</h1><p class="sub">Halal clean bulk · 3,000–3,200 kcal · 150–160 g protein · lift 3–4× a week</p>';
+  PHASES.forEach(function(p,pi){h+='<div class="card"><b>'+p[0]+'</b>'+items(p[1],'p:'+pi+':')+'</div>'});
+  h+='<h2>Adjustment rules</h2><div class="card scroll"><table>'+RULES.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td></tr>'}).join('')+'</table></div>';
+  h+='<p class="muted">Before you start: take a starting photo and measure waist, chest and arms.</p>';
+  h+=pxCard();h+='<div class="card row"><button data-theme-btn>Switch theme</button><button id="reset">Reset all progress</button></div>';
+  return h;
+}
+
+function prep(b){return new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){var im=new Image();im.onload=function(){var r=Math.min(1,1280/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*r);c.height=Math.round(im.height*r);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res({type:'image/jpeg',data:c.toDataURL('image/jpeg',.85).split(',')[1]})};im.onerror=function(){rej({code:'image_rejected'})};im.src=fr.result};fr.onerror=function(){rej({code:'image_rejected'})};fr.readAsDataURL(b)})}
+function proxySample(url){
+  function call(input,o){
+    o=o||{};
+    var msgs=(typeof input==='string'?[{role:'user',content:input}]:input).map(function(m){return {role:m.role,content:m.content}});
+    var im=o.images&&(Array.isArray(o.images)?o.images[0]:o.images);
+    return (im?prep(im):Promise.resolve(null)).then(function(img){
+      if(img){var l=msgs[msgs.length-1];l.content=[{type:'image',source:{type:'base64',media_type:img.type,data:img.data}},{type:'text',text:l.content}]}
+      return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:msgs})});
+    }).then(function(r){return r.json().then(function(j){if(!r.ok)throw {code:r.status===429?'rate_limited':'error',message:(j&&j.error&&j.error.message)||'error'};return j})})
+    .then(function(j){var t=(j.content||[]).map(function(b){return b.text||''}).join('');if(o.onText)o.onText({text:t,delta:t});return {text:t,truncated:false}});
+  }
+  call.json=function(input,o){return call(input,o).then(function(r){return JSON.parse(r.text.replace(/```json|```/g,'').trim())})};
+  call.limits=function(){return Promise.resolve({images:{maxCount:1}})};
+  return call;
+}
+function PX(){var u='';try{u=localStorage.getItem('bulk-proxy')||''}catch(e){}return /^https:\/\//.test(u)?proxySample(u):null}
+function pxCard(){var u='';try{u=localStorage.getItem('bulk-proxy')||''}catch(e){}
+  return '<div class="card"><b>AI connection (advanced)</b><p class="muted" style="margin:6px 0 10px">Only needed outside the Claude link, for example on GitHub. Paste the address of your own AI server.</p><input class="txt" id="px" placeholder="https://bulk-ai.yourname.workers.dev" value="'+esc(u)+'"><div class="row" style="margin-top:10px"><button class="primary" id="pxsave">Save</button><span class="muted">'+(u?'Saved':'Not set')+'</span></div></div>'}
+var SAMPLE,chat=[],busy=false;
+try{if(window.claude&&claude.use){claude.use('sample').then(function(x){SAMPLE=x||PX();if(!x&&SAMPLE)IMG=true;if(x&&x.limits)x.limits().then(function(c){IMG=!!(c&&c.images)}).catch(function(){});if(tab==='coach'&&!busy)render(true)}).catch(function(){SAMPLE=PX();IMG=!!SAMPLE;if(tab==='coach')render(true)})}else{SAMPLE=PX();IMG=!!SAMPLE}}catch(e){SAMPLE=PX();IMG=!!SAMPLE}
+var QUICK=[['📊 Review my week','Review my progress so far and tell me exactly what to change this week (calories, foods, training).'],['🍽️ Plan tomorrow','Give me a halal meal plan for tomorrow of about 3,100 kcal and 155 g protein.'],['😮‍💨 Low appetite','I am not hungry and struggling to eat enough. Give me practical halal ways to hit my calories today.'],['🏋️ Training tips','What should my weekly lifting routine look like for this bulk? Keep it simple.']];
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function md(s){return esc(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>')}
+function context(){
+  var n=curWeek(),l=latest(),lines=[],k='d:'+dkey(new Date())+':';
+  for(var i=1;i<=12;i++)lines.push('Week '+i+' (from '+fmt(wkStart(i))+'): target '+T[i-1].toFixed(1)+' kg, actual '+(S.w[i]||'not logged'));
+  return 'You are the in-app coach for a halal clean bulk. User: Muslim, eats only halal food, started at 80 kg, goal 85 kg by 3 Jan 2027 (about +0.4 kg/week), plan 3,000-3,200 kcal and 150-160 g protein a day, lifts 3-4 times a week. Adjustment rules: weekly gain under 0.25 kg -> add about 200 kcal/day; 0.25-0.5 kg -> stay the course; over 0.5 kg -> cut 150-200 kcal/day. Today is '+new Date().toDateString()+', plan week '+n+'. Latest logged weight: '+(l?l.v+' kg (week '+l.n+')':'none yet')+'. Today\'s daily checklist: '+count(DAILY,k)+'/'+DAILY.length+' done. Intake logged today: '+tot(k.slice(2,-1)).k+' kcal, '+tot(k.slice(2,-1)).p+' g protein. This week\'s checklist: '+count(WEEKLY,'w:'+n+':')+'/'+WEEKLY.length+' done.\nWeights:\n'+lines.join('\n')+'\n\nStyle: friendly, concise and phone-friendly (short paragraphs or short dashed lists, about 180 words max), halal-only food suggestions, concrete numbers. You are not a doctor: for pain, illness or medical conditions suggest seeing a doctor. If height, age or activity level is needed to be precise, ask one short question.';
+}
+function ask(q){
+  if(busy||!SAMPLE||!q||!q.trim())return;
+  chat.push({role:'user',content:q.trim()});
+  var live={role:'assistant',content:''};chat.push(live);
+  busy=true;render(true);window.scrollTo(0,document.body.scrollHeight);
+  var turns=chat.slice(0,-1).slice(-8).map(function(m){return {role:m.role,content:m.content}});
+  while(turns.length&&turns[0].role!=='user')turns.shift();
+  var last=turns[turns.length-1];last.content=context()+'\n\nUser message: '+last.content;
+  SAMPLE(turns,{cache:false,onText:function(o){live.content=o.text;var el=document.getElementById('live');if(el)el.innerHTML=md(o.text)}})
+  .then(function(r){live.content=r.text})
+  .catch(function(e){live.content=live.content||(e&&e.code==='not_granted'?'The coach needs your permission to run. Tap Send again and choose Allow.':e&&e.code==='rate_limited'?'Too many requests. Please try again in a minute.':'Sorry, the coach could not answer right now. Please try again.')})
+  .then(function(){busy=false;render(true)});
+}
+function viewCoach(){
+  var h='<h1>Ask Coach</h1><p class="sub">AI coach that can see your weights and progress.</p>';
+  if(SAMPLE===null)return h+'<div class="card muted">The AI coach is not available in this view. Open the app while signed in to your Claude account.</div>';
+  var dis=(busy||!SAMPLE)?' disabled':'';
+  h+='<div class="chips">'+QUICK.map(function(q,i){return '<button data-ask="'+i+'"'+dis+'>'+q[0]+'</button>'}).join('')+'</div>';
+  if(!chat.length)h+='<div class="card muted">Tap a button above or type your own question below, like "I only gained 0.1 kg this week, what should I change?"</div>';
+  chat.forEach(function(m,i){var isLive=busy&&i===chat.length-1;
+    h+='<div class="msg '+m.role+'"'+(isLive?' id="live"':'')+'>'+(m.content?md(m.content):'Thinking…')+'</div>'});
+  h+='<div class="ask"><textarea id="q" rows="2" placeholder="'+(SAMPLE?'Ask your coach…':'Connecting…')+'"'+dis+'></textarea><button class="primary" id="send"'+dis+'>Send</button></div>';
+  h+='<p class="muted" style="margin-top:10px">General guidance, not medical advice. Uses your Claude account.</p>';
+  return h;
+}
+function viewShop(){
+  var n=curWeek(),pre='sh:'+n+':',idx=0,tot=0,done=0,h='';
+  SHOPCAT.forEach(function(c){
+    var rows=c[1].map(function(t){var k=pre+idx;idx++;tot++;if(S.c[k])done++;
+      return '<label class="it"><input type="checkbox" data-k="'+k+'"'+(S.c[k]?' checked':'')+'><span>'+t+'</span></label>'}).join('');
+    h+='<div class="card"><b>'+c[0]+'</b>'+rows+'</div>'});
+  return '<h1>Shopping list</h1><p class="sub">Week '+n+' · weekly amounts · tick items as you put them in the basket</p>'+
+  '<div class="card"><div class="row"><b>Basket</b><span class="tag">'+done+'/'+tot+'</span></div><div class="bar"><i style="width:'+Math.round(done/tot*100)+'%"></i></div></div>'+h+
+  '<div class="card row"><span class="muted">Starting a new shop?</span><button data-clear>Untick all</button></div>';
+}
+var TABS=[['today','🏠','Home'],['week','✅','Week'],['shop','🛒','Shop'],['coach','🤖','Coach'],['tracker','📈','Progress']];
+function render(keepScroll){
+  var y=window.scrollY;
+  var v={today:viewToday,week:viewWeek,shop:viewShop,coach:viewCoach,tracker:function(){return viewTracker()+viewPlan()}}[tab]();
+  document.getElementById('app').innerHTML=v;
+  document.getElementById('nav').innerHTML=TABS.map(function(t){return '<button data-tab="'+t[0]+'" class="'+(tab===t[0]?'on':'')+'"><b>'+t[1]+'</b>'+t[2]+'</button>'}).join('');
+  document.getElementById('fab').style.display=tab==='today'?'block':'none';
+  if(keepScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
+}
+
+document.addEventListener('click',function(e){
+  if(e.target.id==='ov'){closeSheet();return}
+  var sh=e.target.closest('[data-sheet]');if(sh){sheetAct(sh.getAttribute('data-sheet'));return}
+  var sl=e.target.closest('[data-slot]');if(sl){SLOT=parseInt(sl.getAttribute('data-slot'));M={mode:'menu'};drawSheet();return}
+  var rp=e.target.closest('[data-rep]');if(rp){var m0=RC[parseInt(rp.getAttribute('data-rep'))];if(m0){var c0={};for(var q in m0)c0[q]=m0[q];c0.id=Date.now();c0.t=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});c0.s=SLOT;(S.f[sel]=S.f[sel]||[]).push(c0);save();closeSheet();render(true)}return}
+  var dy=e.target.closest('[data-day]');if(dy){sel=dy.getAttribute('data-day');render(true);return}
+  var dl=e.target.closest('[data-del]');if(dl){var id=dl.getAttribute('data-del');S.f[sel]=(S.f[sel]||[]).filter(function(m){return String(m.id)!==id});save();render(true);return}
+  var t=e.target.closest('[data-tab]');if(t){tab=t.getAttribute('data-tab');if(tab==='week')vw=curWeek();render();return}
+  var nv=e.target.closest('[data-nav]');if(nv){vw=Math.max(1,Math.min(12,vw+parseInt(nv.getAttribute('data-nav'))));render();return}
+  if(e.target.closest('[data-theme-btn]')){TH=TH==='dark'?'light':'dark';try{localStorage.setItem('bulk-theme',TH)}catch(x){}applyTh();render(true);return}
+  var go=e.target.closest('[data-go]');if(go){tab=go.getAttribute('data-go');render();return}
+  if(e.target.closest('[data-clear]')){var pf='sh:'+curWeek()+':';Object.keys(S.c).forEach(function(k){if(k.indexOf(pf)===0)delete S.c[k]});save();render(true);return}
+  var qa=e.target.closest('[data-ask]');if(qa){ask(QUICK[parseInt(qa.getAttribute('data-ask'))][1]);return}
+  if(e.target.id==='send'){var ta=document.getElementById('q');ask(ta?ta.value:'');return}
+  if(e.target.id==='pxsave'){var pv=(document.getElementById('px').value||'').trim();try{if(pv)localStorage.setItem('bulk-proxy',pv);else localStorage.removeItem('bulk-proxy')}catch(x){}location.reload();return}
+  if(e.target.id==='reset'){if(confirm('Clear all checklists and weights?')){S={c:{},w:{},m:{},f:{}};save();render()}}
+});
+document.addEventListener('change',function(e){
+  if(e.target.id==='photo'||e.target.id==='cam'){var pf=e.target.files&&e.target.files[0];e.target.value='';if(pf&&SAMPLE)analyze(pf,null);return}
+  var k=e.target.getAttribute('data-k');
+  if(k){if(e.target.checked)S.c[k]=1;else delete S.c[k];save();render(true);return}
+  var m=e.target.getAttribute('data-m');
+  if(m){var dk=dkey(new Date());S.m[dk]=S.m[dk]||{};var mv=parseFloat(e.target.value);if(mv>0)S.m[dk][m]=mv;else delete S.m[dk][m];save();render(true);return}
+  var w=e.target.getAttribute('data-w');
+  if(w){var v=e.target.value.trim();if(v)S.w[w]=v;else delete S.w[w];save();render(true)}
+});
+render();
+</script>
+</body>
+</html>
